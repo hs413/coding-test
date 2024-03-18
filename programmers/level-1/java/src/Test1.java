@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,38 +23,41 @@ public class Test1 {
 //        5	[2, 4]	[3]	4
 //        3	[3]	[1]	2
 
-        Arrays.sort(lost);
-        int answer = n - lost.length;
-        Set<Integer> set = new HashSet<>();
+        int answer = n;
+        Set<Integer> lostSet = new HashSet<>();
+        Set<Integer> reservable = new HashSet<>();
+
+        for (int l : lost) {
+            lostSet.add(l);
+        }
 
         for (int r : reserve) {
-            set.add(r);
-        }
-
-        List<Integer> rentable = new ArrayList<>();
-        for (int l : lost) {
-            if (set.contains(l)) {
-                answer++;
-                set.remove(l);
-                continue;
-            }
-            rentable.add(l);
-        }
-
-        for (int r : rentable) {
-            int f = r - 1;
-            int b = r + 1;
-
-            if (set.contains(f)) {
-                answer++;
-                set.remove(f);
+            if (lostSet.contains(r)) {
+                lostSet.remove(r);
                 continue;
             }
 
-            if (set.contains(b)) {
-                answer++;
-                set.remove(b);
+            reservable.add(r);
+        }
+
+        for (int i = 1; i <= n; i++) {
+            boolean isLost = lostSet.contains(i);
+
+            if (!isLost) {
+                continue;
             }
+
+            if (reservable.contains(i - 1)) {
+                reservable.remove(i - 1);
+                continue;
+            }
+
+            if (reservable.contains(i + 1)) {
+                reservable.remove(i + 1);
+                continue;
+            }
+
+            answer--;
         }
     }
 }
