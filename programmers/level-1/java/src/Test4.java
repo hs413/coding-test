@@ -21,8 +21,8 @@ public class Test4 {
         Map<String, Map<String, Integer>> giftMap = new HashMap<>();
         Map<String, Integer> scoreMap = new HashMap<>();
 
-        for (String s : gifts) {
-            String[] tmp = s.split(" ");
+        for (String gift : gifts) {
+            String[] tmp = gift.split(" ");
             String giver = tmp[0];
             String taker = tmp[1];
 
@@ -35,9 +35,9 @@ public class Test4 {
         }
 
         Map<String, Integer> takeCntMap = new HashMap<>();
-        int friendsLen = friends.length;
         int answer = 0;
 
+        int friendsLen = friends.length;
         for (int i = 0; i < friendsLen - 1; i++) {
             String giver = friends[i];
             Map<String, Integer> giverMap = giftMap.getOrDefault(giver, new HashMap<>());
