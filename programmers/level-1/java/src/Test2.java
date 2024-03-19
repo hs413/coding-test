@@ -17,6 +17,7 @@ public class Test2 {
         String[] routes = {"E 2", "S 2", "W 1"};
 //        String[] routes = {"E 2", "S 3", "W 1"};
 
+        // 첫 번째 - map 활용
         Map<String, Boolean> map = new HashMap<>();
         int[] cur = new int[2];
 
@@ -45,24 +46,74 @@ public class Test2 {
         xyMap.put("S", 0); goBackMap.put("S", 1);
         xyMap.put("N", 0); goBackMap.put("N", -1);
 
-        for (String s : routes) {
+        out: for (String s : routes) {
             String[] arr = s.split(" ");
             int xy = xyMap.get(arr[0]);
             int goOrBack = goBackMap.get(arr[0]);
 
             int step = Integer.parseInt(arr[1]);
             int[] tmp = cur.clone();
-            boolean go = true;
 
             for (int i = 0; i < step; i++) {
                 tmp[xy] += goOrBack;
                 String pointer = Arrays.toString(tmp);
-                go = map.getOrDefault(pointer, false);
+                boolean go = map.getOrDefault(pointer, false);
 
-                if (!go) break;
+                if (!go) continue out;
             }
 
-            if (go) cur = tmp;
+            cur = tmp;
+        }
+
+        // 두 번째 - 배열 활용
+        int[] cur = new int[2];
+        int parkLen = park.length;
+        int range = park[0].length();
+        String[][] parks = new String[parkLen][];
+
+        boolean findS = false;
+        for (int i = 0; i < parkLen; i ++) {
+            String s = park[i];
+            parks[i] = s.split("");
+
+            if (!findS) {
+                int idx = s.indexOf("S");
+
+                if (idx >= 0) {
+                    cur = new int[] { i, idx };
+                    findS = true;
+                }
+            }
+        }
+
+        Map<String, Integer> xyMap = new HashMap<>();
+        Map<String, Integer> goBackMap = new HashMap<>();
+        xyMap.put("E", 1); goBackMap.put("E", 1);
+        xyMap.put("W", 1); goBackMap.put("W", -1);
+        xyMap.put("S", 0); goBackMap.put("S", 1);
+        xyMap.put("N", 0); goBackMap.put("N", -1);
+
+        out: for (String s : routes) {
+            String[] arr = s.split(" ");
+            int xy = xyMap.get(arr[0]);
+            int goOrBack = goBackMap.get(arr[0]);
+            int step = Integer.parseInt(arr[1]);
+
+            int outRange = xy == 0 ? parkLen : range;
+            int totalStep = goOrBack * step + cur[xy];
+
+            if (totalStep < 0 || outRange <= totalStep) continue;
+
+            int[] tmp = cur.clone();
+
+            for (int i = 0; i < step; i++) {
+                tmp[xy] += goOrBack;
+                boolean stop = parks[tmp[0]][tmp[1]].equals("X");
+
+                if (stop) continue out;
+            }
+
+            cur = tmp;
         }
 
 //        return answer;
