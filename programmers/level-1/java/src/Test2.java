@@ -18,7 +18,7 @@ public class Test2 {
 //        String[] routes = {"E 2", "S 3", "W 1"};
 
         // 첫 번째 - map 활용
-        Map<String, Boolean> map = new HashMap<>();
+        /*Map<String, Boolean> map = new HashMap<>();
         int[] cur = new int[2];
 
         int parkLen = park.length;
@@ -63,7 +63,7 @@ public class Test2 {
             }
 
             cur = tmp;
-        }
+        }*/
 
         // 두 번째 - 배열 활용
         int[] cur = new int[2];
