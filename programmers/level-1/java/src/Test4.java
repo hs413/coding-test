@@ -34,7 +34,7 @@ public class Test4 {
             giftMap.put(giver, map);
         }
 
-        Map<String, Integer> mmap = new HashMap<>();
+        Map<String, Integer> takeCntMap = new HashMap<>();
         int friendsLen = friends.length;
         int answer = 0;
 
@@ -46,24 +46,24 @@ public class Test4 {
                 String taker = friends[j];
                 Map<String, Integer> takerMap = giftMap.getOrDefault(taker, new HashMap<>());
 
-                int n = giverMap.getOrDefault(taker, 0) - takerMap.getOrDefault(giver, 0);
+                int giveCnt = giverMap.getOrDefault(taker, 0) - takerMap.getOrDefault(giver, 0);
 
-                if (n == 0) {
-                    n = scoreMap.getOrDefault(giver, 0) - scoreMap.getOrDefault(taker, 0);
+                if (giveCnt == 0) {
+                    giveCnt = scoreMap.getOrDefault(giver, 0) - scoreMap.getOrDefault(taker, 0);
                 }
 
-                if (n > 0) {
-                    int s = mmap.getOrDefault(giver, 0) + 1;
-                    mmap.put(giver, s);
-                    answer = Math.max(answer, s);
+                int takeCnt = 0;
+                if (giveCnt > 0) {
+                    takeCnt = takeCntMap.getOrDefault(giver, 0) + 1;
+                    takeCntMap.put(giver, takeCnt);
                 }
 
-                if (n < 0) {
-                    int s = mmap.getOrDefault(taker, 0) + 1;
-                    mmap.put(taker, s);
-                    answer = Math.max(answer, s);
+                if (giveCnt < 0) {
+                    takeCnt = takeCntMap.getOrDefault(taker, 0) + 1;
+                    takeCntMap.put(taker, takeCnt);
                 }
 
+                answer = Math.max(answer, takeCnt);
                 takerMap.remove(giver);
             }
         }
