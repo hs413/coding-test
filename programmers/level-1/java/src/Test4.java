@@ -40,52 +40,31 @@ public class Test4 {
 
         for (int i = 0; i < friendsLen - 1; i++) {
             String giver = friends[i];
-            Map<String, Integer> giveMap = giftMap.getOrDefault(giver, new HashMap<>());
+            Map<String, Integer> giverMap = giftMap.getOrDefault(giver, new HashMap<>());
 
             for (int j = i + 1; j < friendsLen; j++) {
                 String taker = friends[j];
-                Map<String, Integer> takeMap = giftMap.getOrDefault(taker, new HashMap<>());
+                Map<String, Integer> takerMap = giftMap.getOrDefault(taker, new HashMap<>());
 
-                int given = giveMap.getOrDefault(taker, 0);
-                int taken = takeMap.getOrDefault(giver, 0);
+                int n = giverMap.getOrDefault(taker, 0) - takerMap.getOrDefault(giver, 0);
 
-                if (given > taken) {
+                if (n == 0) {
+                    n = scoreMap.getOrDefault(giver, 0) - scoreMap.getOrDefault(taker, 0);
+                }
+
+                if (n > 0) {
                     int s = mmap.getOrDefault(giver, 0) + 1;
                     mmap.put(giver, s);
                     answer = Math.max(answer, s);
-
-                    takeMap.remove(giver);
-                    continue;
                 }
 
-                if (given < taken) {
+                if (n < 0) {
                     int s = mmap.getOrDefault(taker, 0) + 1;
                     mmap.put(taker, s);
                     answer = Math.max(answer, s);
-
-                    takeMap.remove(giver);
-                    continue;
                 }
 
-                int giverScore = scoreMap.getOrDefault(giver, 0);
-                int takerScore = scoreMap.getOrDefault(taker, 0);
-
-                if (giverScore > takerScore) {
-                    int s = mmap.getOrDefault(giver, 0) + 1;
-                    mmap.put(giver, s);
-                    answer = Math.max(answer, s);
-
-                    takeMap.remove(giver);
-                    continue;
-                }
-
-                if (giverScore < takerScore) {
-                    int s = mmap.getOrDefault(taker, 0) + 1;
-                    mmap.put(taker, s);
-                    answer = Math.max(answer, s);
-
-                    takeMap.remove(giver);
-                }
+                takerMap.remove(giver);
             }
         }
 
