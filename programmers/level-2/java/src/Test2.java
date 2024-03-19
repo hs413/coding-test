@@ -15,12 +15,12 @@ public class Test2 {
 
         StringBuilder sb = new StringBuilder();
         Arrays
-            .stream(s.split(""))
+            .stream(s.toLowerCase().split(""))
             .reduce("", (acc, cur) -> {
                 if (acc.isBlank()) {
                     sb.append(cur.toUpperCase());
                 } else {
-                    sb.append(cur.toLowerCase());
+                    sb.append(cur);
                 }
 
                 return cur;
