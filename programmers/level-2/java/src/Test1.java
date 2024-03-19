@@ -33,4 +33,23 @@ public class Test1 {
 
         System.out.println();
     }
+
+    // 다른 유저 풀이
+    // Arrays.stream().min() .max 메서드 사용 풀이
+    public String getMinMaxString(String str) {
+        String[] arrStr = str.split(" ");
+        int[] arrInt = new int[arrStr.length];
+        int i=0;
+        for(String part : arrStr){
+            arrInt[i] = Integer.parseInt(part);
+            i++;
+        }
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(Arrays.stream(arrInt).min().getAsInt());
+        sb.append(" ");
+        sb.append(Arrays.stream(arrInt).max().getAsInt());
+
+        return sb.toString();
+    }
 }
