@@ -1,8 +1,4 @@
 import java.util.Arrays;
-import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /** 최댓값과 최솟값
  * https://school.programmers.co.kr/learn/courses/30/lessons/12939

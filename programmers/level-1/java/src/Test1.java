@@ -2,6 +2,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Greedy 체육복
+ * https://school.programmers.co.kr/learn/courses/30/lessons/42862
  * 전체 학생의 수는 2명 이상 30명 이하
  * 체육복을 도난당한 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.
  * 여벌의 체육복을 가져온 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.

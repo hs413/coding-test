@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** 달리기 경주
+ * https://school.programmers.co.kr/learn/courses/30/lessons/178871
  * 선수들이 자기 바로 앞의 선수를 추월할 때 추월한 선수의 이름을 부릅니다.
  * 예를 들어 1등부터 3등까지 "mumu", "soe", "poe" 선수들이 순서대로 달리고 있을 때,
  * 해설진이 "soe"선수를 불렀다면 2등인 "soe" 선수가 1등인 "mumu" 선수를 추월했다는 것입니다.
