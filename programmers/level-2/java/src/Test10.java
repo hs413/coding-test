@@ -30,4 +30,21 @@ public class Test10 {
         System.out.println();
 
     }
+
+    // 다른 사람 풀이
+    public int solution(int[] num) {
+        int answer = num[0], g;
+        for (int i = 1; i < num.length; i++) {
+            g = gcd(answer, num[i]);
+            answer = g * (answer / g) * (num[i] / g);
+        }
+        return answer;
+    }
+
+    public int gcd(int a, int b) {
+        if (a > b)
+            return (a % b == 0) ? b : gcd(b, a % b);
+        else
+            return (b % a == 0) ? a : gcd(a, b % a);
+    }
 }
