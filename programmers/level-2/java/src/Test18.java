@@ -15,22 +15,14 @@ public class Test18 {
 
         Arrays.sort(phoneBook);
 
-        out: for (int i = 0; i < len - 1; i++) {
+        for (int i = 0; i < len - 1; i++) {
             String a = phoneBook[i];
+            String b = phoneBook[i + 1];
 
-            for (int j = i + 1; j < len; j++) {
-                String b = phoneBook[j];
+            answer = b.startsWith(a);
 
-                if (a.length() > b.length()) continue out;
-
-                if (b.startsWith(a)) {
-                    answer = false;
-                    break out;
-                }
-            }
+            if (!answer) break;
         }
-
-        System.out.println();
     }
 }
 
