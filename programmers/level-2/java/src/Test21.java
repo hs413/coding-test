@@ -21,30 +21,27 @@ public class Test21 {
     }
 
     public static String solution(String number, int k) {
-        StringBuilder sb = new StringBuilder(number);
+        StringBuilder sb = new StringBuilder(number.length());
         int kClone = k;
 
-        for (int i = 1 ; i < sb.length() ; i++) {
-            char current = sb.charAt(i);
-            int compared = current - sb.charAt(i - 1);
+        sb.append(number.charAt(0));
+        for (int i = 1 ; i < number.length() ; i++) {
+            char current = number.charAt(i);
+            int compared = current - number.charAt(i - 1);
+            sb.append(current);
 
-            if (compared > 0) {
-                int j = i;
-                while (j > 0 && k > 0) {
-                    compared = current - sb.charAt(j - 1);
+            while (compared > 0 && sb.length() > 1 && k > 0) {
+                int j = sb.length() - 1;
+                int sbCompared = sb.charAt(j) - sb.charAt(j - 1);
 
-                    if (compared <= 0) break;
+                if (sbCompared <= 0) break;
 
-                    sb.deleteCharAt(j - 1);
-                    k--;
-                    j--;
-                }
-                i = j;
+                sb.deleteCharAt(j - 1);
+                k--;
             }
         }
 
         return sb.substring(0, number.length() - kClone);
     }
-
 }
 
